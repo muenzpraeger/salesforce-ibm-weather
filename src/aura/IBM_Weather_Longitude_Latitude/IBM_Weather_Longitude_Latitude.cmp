@@ -1,0 +1,72 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" controller="IBMWeather_Controller">
+    
+    <aura:attribute name="weatherObservationData" type="IBMWeather_Observation"></aura:attribute>
+    <aura:attribute name="weatherForecastData" type="IBMWeather_Forecast[]"></aura:attribute>
+    <aura:attribute name="weatherAlertData" type="IBMWeather_Alert[]"></aura:attribute>
+    <aura:attribute name="weatherLoaded" type="Boolean" default="false"></aura:attribute>
+    <aura:attribute name="weatherLoadedWithIcon" type="Boolean" default="false"></aura:attribute>
+    <aura:attribute name="weatherAlertDataAvailable" type="Boolean" default="false"></aura:attribute>
+    <aura:attribute name="recordId" type="Id" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getWeather}" />
+    
+    <aura:renderIf isTrue="{!v.weatherLoaded}">
+        <div>
+            <div class="temp-header">The Weather Company Data</div>
+            <br />
+            <lightning:tabset >
+                <lightning:tab >
+                    <aura:set attribute="label">Today</aura:set>
+                    <div class="slds-grid slds-grid--vertical-align-start">
+                        <div>
+                            <aura:renderIf isTrue="{!v.weatherLoadedWithIcon}">
+                                <img src="{!'/resource/IBMWeatherIcons_v1/icon'+v.weatherObservationData.wx_icon+'.png'}" class="slds-grid--vertical-align-center temp-img-observation"></img>
+                            </aura:renderIf>
+                        </div>
+                        <div>
+                            <div class="temp-main">{!v.weatherObservationData.temp}° F | {!v.weatherObservationData.wx_phrase}</div>
+                            <table width="300px">
+                                <tr><td>Max / Min Temp: </td><td>{!v.weatherForecastData[0].max_temp} / {!v.weatherForecastData[0].min_temp} ° F</td></tr>
+                                <tr><td>Humidity:  </td><td>{!v.weatherObservationData.rh} %</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </lightning:tab>
+                <lightning:tab >
+                    <aura:set attribute="label">Forecast</aura:set>
+                    <aura:iteration items="{!v.weatherForecastData}" var="item">
+                        <div class="slds-grid">
+                            <div>
+                                <img src="{!'/resource/IBMWeatherIcons_v1/icon'+item.day.icon_code+'.png'}" class="temp-img-forecast"></img>
+                            </div>
+                            <div>
+                                <strong>{!item.day.daypart_name}</strong><br />{!item.narrative}<br /><br />
+                            </div>
+                        </div>
+                    </aura:iteration>
+                </lightning:tab>
+                <aura:renderIf isTrue="{!v.weatherAlertDataAvailable}">
+                    <lightning:tab >
+                        <aura:set attribute="label">Alerts
+                            <lightning:icon iconName="utility:warning" variant="error" size="x-small" />
+                        </aura:set>
+                        <div class="slds-grid">
+                            <div class="slds-col">
+                                <aura:iteration items="{!v.weatherAlertData}" var="item">
+                                    <div class="slds-grid">
+                                        <div>
+                                            <strong>{!item.headline_text}</strong><br />{!item.source}<br /><br />
+                                        </div>
+                                    </div>
+                                </aura:iteration>
+                            </div>
+                        </div>
+                    </lightning:tab>
+                </aura:renderIf>
+            </lightning:tabset>
+        </div>
+        <br />
+    </aura:renderIf>
+    
+    
+</aura:component>

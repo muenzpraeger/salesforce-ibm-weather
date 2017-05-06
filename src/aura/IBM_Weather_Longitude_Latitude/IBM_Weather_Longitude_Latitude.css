@@ -1,0 +1,19 @@
+.THIS .temp-header {
+    font-size:1.2em;
+}
+
+.THIS .temp-img-observation {
+    margin-right: 20px;
+    height: 65px;
+    width: 65px;
+}
+
+.THIS .temp-img-forecast {
+    margin-right: 20px;
+    height: 38px;
+    width: 38px;
+}
+
+.THIS .temp-main {
+    font-size:1.7em;
+}
