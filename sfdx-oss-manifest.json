@@ -2,9 +2,9 @@
   "sfdxSource": true,
   "version": "1.0.0",
   "folders": [
-    "aura",
-    "classes",
-    "staticresources"
+    "src/aura",
+    "src/classes",
+    "src/staticresources"
   ],
   "files": [
   ]
