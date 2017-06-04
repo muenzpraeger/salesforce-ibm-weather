@@ -110,6 +110,43 @@ public class IBMWeather_Controller {
         
         return null;
     }
- 
+    
+    @future(callout=true)
+    public static void checkWeatherForecastsForFittings(Id accountId) {
+        IBMWeather_Forecast[] forecasts = getWeather3DayForecasts(accountId);
+        
+        // We only need tomorrows weather in this implementation
+        String message = evaluateBadWeatherConditions(forecasts.get(1));
+        
+        if (!message.equals('')) {
+            ConnectApi.FeedElement fe = ConnectApiHelper.postFeedItemWithMentions(
+                Network.getNetworkId(),
+                accountId,
+                message);
+        }
+    }
+    
+    private static String evaluateBadWeatherConditions(IBMWeather_Forecast forecast) {
+        
+        Boolean withRain;
+        Boolean withWind;
+        
+        if (forecast.day.precipitation>35) { // precipitation is higher than 35%
+            withRain = true;
+        }
+        if (forecast.day.wspd>5) { // wind is stronger than 5
+            withWind = true;
+        }
+        
+        if (withRain && withWind) {
+            return 'Holy Moly - it will be rainy and stormy!';
+        } else if (withRain) {
+            return 'Some rain will come down!';
+        } else if (withWind) {
+            return 'Strong winds are expected!';
+        }
+        
+        return '';
+    }
     
 }
