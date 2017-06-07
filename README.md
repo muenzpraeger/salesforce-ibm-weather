@@ -3,14 +3,15 @@
 This repository showcases how to use The Weather Company Data within Salesforce.
 
 * A Lightning component that displays the current weather, a 3-day forecast and - if applicable - weather alerts.
+* Apex classes for Process Builder invocation or Scheduled Apex
 
-You can see the component here in action:
+You can see the Lightning component here in action:
 
 [![Salesforce Lightning and The Weather Company](http://img.youtube.com/vi/ZjffiGsdrWM/0.jpg)](https://youtube.com/watch?v=ZjffiGsdrWM)
 
 This implementation does *not* reflect the planned The Weather Company integrations as announced [here](https://www.salesforce.com/campaign/ibm/) (i. e. with push data). It rather showcases how to use existing APIs to fetch data on demand.
 
-Read more about using weather data on the [Salesforce Developer Blog](https://developer.salesforce.com/blogs/developer-relations/2017/05/using-ibms-the-weather-company-data-in-salesforce).
+Read more about using weather data with the [Lightning component](https://developer.salesforce.com/blogs/developer-relations/2017/05/using-ibms-weather-company-data-salesforce.html) or in your [custom workflows](https://developer.salesforce.com/blogs/developer-relations/2017/06/enhancing-workflows-weather-company-data-service.html) on the [Salesforce Developer Relations blog](https://developer.salesforce.com/blogs/developer-relations/).
 
 # Pre-Requisites
 
@@ -24,7 +25,7 @@ You can find an overview of the API in the [The Weather Company Data REST API ex
 
 ### Installation
 
-You can add the source code of this repo via your favorite tooling (i. e. Salesforce DX or the Force.com IDE). Alternatively you can use [this unmanaged package](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t0Y000001VTXL) to install the code into a Salesforce org.
+You can add the source code of this repo via your favorite tooling (i. e. Salesforce DX or the Force.com IDE). Alternatively you can use [this unmanaged package](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t0Y000001VTXL) to install the code for the Lightning component into a Salesforce org.
 
 ### Configuration - Credentials
 
